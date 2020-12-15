@@ -1,0 +1,25 @@
+{
+  "name": "b2w-st-planets",
+  "version": "1.0.0",
+  "description": "Desafio Backend - Star Wars API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RafaelLDSX/b2w-st-planets.git"
+  },
+  "author": "Rafael Xavier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RafaelLDSX/b2w-st-planets/issues"
+  },
+  "homepage": "https://github.com/RafaelLDSX/b2w-st-planets#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6"
+  }
+}
