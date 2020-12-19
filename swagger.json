@@ -1,0 +1,179 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Star Wars Planets REST API",
+    "description": "API proposta como desafio para o processo seletivo da B2W para desenvolvedor back-end",
+    "contact": {
+      "email": "rafael_ldsx@hotmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/planetas",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {},
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [ "Obter planetas" ],
+        "summary": "Busca todos os planetas existentes (aceita nome como filtro)",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Planeta(s) obtido(s) com sucesso",
+            "schema":{
+              "type": "array",
+              "items":{
+                "$ref": "#/components/schemas/PlanetaComFilme"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Criar planeta"],
+        "summary": "Cria um planeta novo",
+        "parameters": [
+          {
+            "name": "planeta",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Planeta"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Planeta criado com sucesso",
+            "schema": {
+              "$ref": "#/components/schemas/PlanetaComId"
+            }
+          },
+          "422": {
+            "description": "Erro de validação",
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "tags": ["Obter planetas"],
+        "summary": "Busca um planeta por id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Planeta obtido com sucesso",
+            "schema": {
+              "$ref": "#/components/schemas/PlanetaComFilme"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Excluir planeta"],
+        "summary": "Exclui um planeta por id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Planeta excluído com sucesso"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "properties": {
+          "mensagem": {
+            "type": "string"
+          }
+        }
+      },
+      "Planeta": {
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "clima": {
+            "type": "string"
+          },
+          "terreno": {
+            "type": "string"
+          }
+        }
+      },
+      "PlanetaComId": {
+        "properties": {
+          "_id": {
+            "type": "string"
+          }
+        },
+        "allOf": [{
+          "$ref": "#/components/schemas/Planeta"
+        }]
+      },
+      "PlanetaComFilme": {
+        "allOf": [{
+          "$ref": "#/components/schemas/PlanetaComId"
+        }],
+        "properties": {
+          "filmes": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

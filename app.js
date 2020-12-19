@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 const db = require('./database/config');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger.json');
 
 class App {
     constructor() {
@@ -21,6 +23,7 @@ class App {
 
     middlewares() {
         this.app.use(express.json());
+        this.app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
     }
 
     models() {
