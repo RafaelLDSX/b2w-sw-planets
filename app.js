@@ -1,5 +1,5 @@
 const express = require('express');
-const port = 3000;
+require('dotenv').config();
 const db = require('./database/config');
 
 class App {
@@ -11,8 +11,8 @@ class App {
         this.models();
         this.routes();
 
-        this.app.listen(port, () => 
-            console.log(`Escutando na porta http://localhost:${port}`));
+        this.app.listen(process.env.PORT, () => 
+            console.log(`Escutando na porta http://localhost:${process.env.PORT}`));
     }
 
     database() {

@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const PlanetaSchema = new mongoose.Schema({
     nome: {
         type: String,
-        required: true,
+        required: [true, 'Nome do planeta é obrigatório'],
     },
     clima: {
         type: String,
-        required: true,
+        required: [true, 'Clima do planeta é obrigatório'],
     },
     terreno: {
         type: String,
-        required: true,
+        required: [true, 'Terreno do planeta é obrigatório'],
     }
 });
 

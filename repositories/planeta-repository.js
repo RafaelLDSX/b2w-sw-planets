@@ -4,7 +4,7 @@ const Planeta = mongoose.model('Planetas');
 
 class PlanetaRepository {
     async listarPlanetas(){ 
-        const planetas = await Planeta.find({});
+        const planetas = await Planeta.find({}, '_id nome clima terreno');
         return planetas;
     }
 
@@ -15,7 +15,7 @@ class PlanetaRepository {
     }
 
     async buscarPlanetaPorId(id) {
-        const planeta = await Planeta.findById(id);
+        const planeta = await Planeta.findById(id, '_id nome clima terreno');
         if (!planeta) {
             throw new NaoEncontrado(`Planeta com id \'${id}\' não encontrado!`);
         }
@@ -23,8 +23,7 @@ class PlanetaRepository {
     }
 
     async buscarPlanetaPorNome(nome) {
-        const planeta = await Planeta.find({"nome": nome});
-        console.log(planeta);
+        const planeta = await Planeta.find({"nome": nome}, '_id nome clima terreno');
         if (!planeta || planeta.length < 1) {
             throw new NaoEncontrado(`Planeta com nome \'${nome}\' não encontrado!`);
         }
